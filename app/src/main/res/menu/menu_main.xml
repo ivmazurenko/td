@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/MainActivityToolbarDeleteItem"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="@string/main_activity_toolbar_action_remove"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/MainActivityToolbarCreateItem"
+        android:icon="@drawable/ic_baseline_note_add_24"
+        android:title="@string/main_activity_toolbar_action_create"
+        app:showAsAction="always" />
+</menu>
