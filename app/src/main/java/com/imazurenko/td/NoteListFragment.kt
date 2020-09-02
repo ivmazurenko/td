@@ -36,7 +36,7 @@ class NoteListFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.NoteListFragmentRecyclerView.adapter = NoteListRecyclerViewAdapter()
+        binding.NoteListFragmentRecyclerView.adapter = NoteListRecyclerViewAdapter(this)
         binding.NoteListFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return binding.root
