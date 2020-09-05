@@ -3,4 +3,8 @@
     <string name="main_activity_toolbar_action_remove">Удалить</string>
     <string name="main_activity_toolbar_action_create">Создать</string>
     <string name="save">Сохранить</string>
+    <string name="copied">Заметка скопирована в буфер обмена.</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="are_you_sure_you_want_to_delete_this_note">Вы уверены, что хотите удалить эту заметку?</string>
 </resources>

@@ -11,20 +11,54 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/ripple_effect"
+        android:navigate="@{() -> viewModel.getNavigationTarget()}"
+        app:onLongClickListener="@{() -> viewModel.select()}">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:navigate="@{() -> viewModel.getNavigationTarget()}"
             android:padding="16dp"
             android:text="@{viewModel.text}"
             android:textColor="@android:color/black"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:onClick="@{() -> viewModel.deselect()}"
+            android:visibleOrGone="@{viewModel.isSelected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/NoteListItemFirstButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:copyToClipboardOnClick="@{() -> viewModel.getTextForCopy()}"
+                android:src="@drawable/ic_baseline_file_copy_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/NoteListItemSecondButton" />
+
+            <ImageButton
+                android:id="@+id/NoteListItemSecondButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:setOnClickListenerWithConfirmation="@{() -> viewModel.delete()}"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="0dp"

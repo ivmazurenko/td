@@ -7,12 +7,11 @@ import javax.inject.Singleton
 class NoteRepository @Inject constructor(appDatabase: AppDatabase) {
     private var noteEntityDao: NoteEntityDao = appDatabase.noteEntityDao()
 
-    val updatedEvent = Event()
+    val updatedEvent = Event<NoteRepositoryUpdatedEventArgs>()
 
     var currentId: Long? = null
         set(value) {
             field = value
-            updatedEvent.invoke()
         }
 
     suspend fun getByUid(uid: Long): NoteEntity {
@@ -25,18 +24,24 @@ class NoteRepository @Inject constructor(appDatabase: AppDatabase) {
 
     suspend fun update(noteEntity: NoteEntity) {
         noteEntityDao.update(noteEntity)
-        updatedEvent.invoke()
+        updatedEvent.invoke(NoteRepositoryUpdatedEventArgs.Update)
     }
 
     suspend fun insert(noteEntity: NoteEntity): Long {
         val insert = noteEntityDao.insert(noteEntity)
-        updatedEvent.invoke()
+        updatedEvent.invoke(NoteRepositoryUpdatedEventArgs.Insert)
 
         return insert
     }
 
     suspend fun delete(uid: Long) {
         noteEntityDao.delete(uid)
-        updatedEvent.invoke()
+        updatedEvent.invoke(NoteRepositoryUpdatedEventArgs.Delete)
     }
+}
+
+enum class NoteRepositoryUpdatedEventArgs {
+    Insert,
+    Update,
+    Delete,
 }

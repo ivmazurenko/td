@@ -1,15 +1,15 @@
 package com.imazurenko.td
 
-class Event {
-    private val _subscribers: MutableList<IEventListener> = mutableListOf()
+class Event<T> {
+    private val _subscribers: MutableList<IEventListener<T>> = mutableListOf()
 
-    fun add(e: IEventListener) {
+    fun add(e: IEventListener<T>) {
         this._subscribers.add(e)
     }
 
-    fun remove(e: IEventListener) {
+    fun remove(e: IEventListener<T>) {
         this._subscribers.remove(e)
     }
 
-    fun invoke() = _subscribers.forEach { it.onEvent() }
+    fun invoke(args: T) = _subscribers.forEach { it.onEvent(args) }
 }

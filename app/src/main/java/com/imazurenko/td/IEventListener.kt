@@ -1,5 +1,5 @@
 package com.imazurenko.td
 
-interface IEventListener {
-    fun onEvent()
+interface IEventListener<T> {
+    fun onEvent(args: T)
 }
